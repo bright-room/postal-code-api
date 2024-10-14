@@ -61,7 +61,7 @@ postgresql = { module = "org.postgresql:postgresql", version = { strictly = "42.
 #########################################
 # unit test library
 #########################################
-mockk = { module = "io.mockk:mockk", version = { strictly = "1.13.12" } }
+mockk = { module = "io.mockk:mockk", version = { strictly = "1.13.13" } }
 
 [bundles]
 ktor-server = [

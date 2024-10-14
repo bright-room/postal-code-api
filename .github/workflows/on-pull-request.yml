@@ -1,0 +1,24 @@
+name: on-pull-request
+
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - 'renovate.json'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Gradle Cache
+        uses: ./.github/actions/gradle-cache
+
+      - name: Check with Gradle
+        uses: ./.github/actions/gradle-action
+        with:
+          command: check

@@ -2,7 +2,7 @@
 java = "21"
 kotlin_platform_version = { strictly = "2.0.21" }
 koin_platform_version = { strictly = "4.0.0" }
-exposed_platform_version = { strictly = "0.53.0" }
+exposed_platform_version = { strictly = "0.55.0" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin_platform_version" }

@@ -2,7 +2,7 @@ ktor:
   environment: "$PROFILE:dev"
   application:
     modules:
-      - "net.brightroom.postalcode.config.ConfigKt.module"
+      - "net.brightroom.postalcode.config.ConfigurationModulesKt.module"
   deployment:
     port: 8080
   datasource:

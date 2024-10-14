@@ -1,7 +1,13 @@
-create table migration_test(
-    id serial not null primary key,
-    created_at timestamp without time zone not null default current_timestamp
+create table address(
+    postal_code varchar(7) not null primary key,
+    national_local_government_code varchar(6) not null,
+    state_name_kanji varchar(20) not null,
+    state_name_kana varchar(50) not null,
+    state_name_latin varchar(50) not null,
+    city_name_kanji varchar(20) not null,
+    city_name_kana varchar(50) not null,
+    city_name_latin varchar(50) not null,
+    street_name_kanji varchar(20) not null,
+    street_name_kana varchar(50) not null,
+    street_name_latin varchar(50) not null
 );
-comment on table migration_test is 'マイグレーションテスト用';
-comment on column migration_test.id is 'ID';
-comment on column migration_test.created_at is '作成日時';

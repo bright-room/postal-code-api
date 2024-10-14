@@ -1,43 +1,56 @@
-val kotlin_version: String by project
-val logback_version: String by project
-val exposed_version: String by project
-val h2_version: String by project
-val postgres_version: String by project
-
 plugins {
-    kotlin("jvm") version "2.0.21"
-    id("io.ktor.plugin") version "3.0.0"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktor)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.spotless)
 }
 
-group = "brightroom.net"
+group = "net.brightroom"
 version = "0.0.1"
 
+dependencies {
+    implementation(libs.bundles.ktor.server)
+    implementation(libs.bundles.ktor.server.datasource.access)
+
+    testImplementation(kotlin("test-junit5"))
+    testImplementation(libs.bundles.ktor.server.test)
+}
+
+java {
+    toolchain {
+        val javaVersion = libs.versions.java.get()
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+}
+
 application {
-    mainClass.set("io.ktor.server.cio.EngineMain")
+    mainClass.set("net.brightroom.postalcode.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
 
-dependencies {
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-double-receive-jvm")
-    implementation("io.ktor:ktor-server-webjars-jvm")
-    implementation("org.webjars:jquery:3.2.1")
-    implementation("io.github.smiley4:ktor-swagger-ui:2.9.0")
-    implementation("io.ktor:ktor-server-resources-jvm")
-    implementation("io.ktor:ktor-server-call-logging-jvm")
-    implementation("io.ktor:ktor-server-call-id-jvm")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm")
-    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    implementation("com.h2database:h2:$h2_version")
-    implementation("org.postgresql:postgresql:$postgres_version")
-    implementation("io.ktor:ktor-server-cio-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-config-yaml")
-    testImplementation("io.ktor:ktor-server-test-host-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+spotless {
+    kotlin {
+        targetExclude("build/**")
+
+        val config =
+            mapOf(
+                "ktlint_standard_property-name" to "disabled",
+                "ktlint_standard_enum-entry-name-case" to "disabled",
+                "ktlint_standard_function-naming" to "disabled",
+            )
+
+        ktlint()
+            .editorConfigOverride(config)
+    }
+    kotlinGradle {
+        ktlint()
+    }
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }

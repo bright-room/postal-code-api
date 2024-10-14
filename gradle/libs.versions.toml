@@ -1,0 +1,84 @@
+[versions]
+java = "21"
+kotlin_platform_version = { strictly = "2.0.21" }
+exposed_platform_version = { strictly = "0.53.0" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin_platform_version" }
+ktor = { id = "io.ktor.plugin", version = { strictly = "3.0.0" } }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin_platform_version" }
+spotless = { id = "com.diffplug.spotless", version = { strictly = "6.25.0" } }
+
+[libraries]
+#########################################
+# ktor common modules
+#########################################
+ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json" }
+
+#########################################
+# ktor server modules
+#########################################
+ktor-server-core = { module = "io.ktor:ktor-server-core" }
+ktor-server-engine-cio = { module = "io.ktor:ktor-server-cio" }
+ktor-server-content-negotiation = { module = "io.ktor:ktor-server-content-negotiation" }
+ktor-server-config-yaml = { module = "io.ktor:ktor-server-config-yaml" }
+ktor-server-call-id = { module = "io.ktor:ktor-server-call-id" }
+ktor-server-call-logging = { module = "io.ktor:ktor-server-call-logging" }
+ktor-server-double-receive = { module = "io.ktor:ktor-server-double-receive" }
+ktor-server-resources = { module = "io.ktor:ktor-server-resources" }
+
+ktor-server-test-host = { module = "io.ktor:ktor-server-test-host" }
+
+#########################################
+# ktor server 3rd party modules
+#########################################
+ktor-server-swagger-ui = { module = "io.github.smiley4:ktor-swagger-ui", version = { strictly = "2.9.0" } }
+
+#########################################
+# logging modules
+#########################################
+logback-classic = { module = "ch.qos.logback:logback-classic", version = { strictly = "1.4.14" } }
+
+#########################################
+# ORM modules
+#########################################
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed_platform_version" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed_platform_version" }
+
+#########################################
+# jdbc modules
+#########################################
+postgresql = { module = "org.postgresql:postgresql", version = { strictly = "42.5.1" } }
+
+#########################################
+# unit test library
+#########################################
+mockk = { module = "io.mockk:mockk", version = { strictly = "1.13.12" } }
+
+[bundles]
+ktor-server = [
+    "ktor-server-core",
+    "ktor-server-engine-cio",
+    "ktor-server-content-negotiation",
+    "ktor-server-config-yaml",
+    "ktor-server-call-id",
+    "ktor-server-call-logging",
+    "ktor-server-double-receive",
+    "ktor-server-resources",
+
+    "ktor-serialization-json",
+
+    "ktor-server-swagger-ui",
+    "logback-classic"
+]
+
+ktor-server-datasource-access = [
+    "exposed-core",
+    "exposed-jdbc",
+    "postgresql"
+]
+
+ktor-server-test = [
+    "ktor-server-test-host",
+    "mockk"
+]

@@ -1,6 +1,6 @@
 ktor:
   application:
     modules:
-      - brightroom.net.ApplicationKt.module
+      - net.brightroom.postalcode.config.ConfigKt.module
   deployment:
     port: 8080

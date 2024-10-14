@@ -33,7 +33,7 @@ ktor-server-test-host = { module = "io.ktor:ktor-server-test-host" }
 #########################################
 # ktor server 3rd party modules
 #########################################
-ktor-server-swagger-ui = { module = "io.github.smiley4:ktor-swagger-ui", version = { strictly = "2.10.1" } }
+ktor-server-swagger-ui = { module = "io.github.smiley4:ktor-swagger-ui", version = { strictly = "3.5.1" } }
 
 #########################################
 # logging modules

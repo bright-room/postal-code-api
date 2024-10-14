@@ -1,0 +1,15 @@
+services:
+  postal_code_db:
+    extends:
+      service: postal_code_db
+      file: docker/postgres.yaml
+  postal_code_db_migration:
+    extends:
+      service: postal_code_db_migration
+      file: docker/flyway.yaml
+    volumes:
+      - ./docker/flyway:/flyway/conf
+      - ./docker/flyway/migration:/flyway/sql
+    depends_on:
+      postal_code_db:
+        condition: service_healthy

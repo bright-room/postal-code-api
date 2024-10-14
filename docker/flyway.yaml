@@ -1,0 +1,6 @@
+services:
+  postal_code_db_migration:
+    image: flyway/flyway:latest
+    container_name: postal_code_db_migration
+    hostname: postal_code_db_migration
+    command: migrate

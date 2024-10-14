@@ -9,6 +9,8 @@ group = "net.brightroom"
 version = "0.0.1"
 
 dependencies {
+    implementation(project.dependencies.platform(libs.koin.bom))
+
     implementation(libs.bundles.ktor.server)
     implementation(libs.bundles.ktor.server.datasource.access)
 

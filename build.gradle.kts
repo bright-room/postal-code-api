@@ -14,6 +14,8 @@ dependencies {
     implementation(libs.bundles.ktor.server)
     implementation(libs.bundles.ktor.server.datasource.access)
 
+    runtimeOnly(libs.postgresql)
+
     testImplementation(kotlin("test-junit5"))
     testImplementation(libs.bundles.ktor.server.test)
 }

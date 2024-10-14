@@ -85,8 +85,7 @@ ktor-server = [
 
 ktor-server-datasource-access = [
     "exposed-core",
-    "exposed-jdbc",
-    "postgresql"
+    "exposed-jdbc"
 ]
 
 ktor-server-test = [

@@ -56,7 +56,7 @@ exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "e
 #########################################
 # jdbc modules
 #########################################
-postgresql = { module = "org.postgresql:postgresql", version = { strictly = "42.5.6" } }
+postgresql = { module = "org.postgresql:postgresql", version = { strictly = "42.7.4" } }
 
 #########################################
 # unit test library

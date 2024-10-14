@@ -6,6 +6,7 @@ import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 import org.koin.ksp.generated.module
 import org.koin.ktor.plugin.koin
+import org.koin.logger.slf4jLogger
 
 @ComponentScan("net.brightroom.postalcode")
 @Module
@@ -16,6 +17,7 @@ object DependencyInjectionModules {
 
 fun Application.configureDependencyInjection() {
     koin {
+        slf4jLogger()
         modules(DependencyInjectionModules.module)
     }
 }

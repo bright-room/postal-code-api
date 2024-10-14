@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.ktor)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.spotless)
+    alias(libs.plugins.ksp)
 }
 
 group = "net.brightroom"
@@ -10,14 +11,22 @@ version = "0.0.1"
 
 dependencies {
     implementation(project.dependencies.platform(libs.koin.bom))
+    implementation(project.dependencies.platform(libs.koin.annotations.bom))
 
     implementation(libs.bundles.ktor.server)
     implementation(libs.bundles.ktor.server.datasource.access)
 
     runtimeOnly(libs.postgresql)
+    ksp(libs.koin.ksp.compiler)
 
     testImplementation(kotlin("test-junit5"))
     testImplementation(libs.bundles.ktor.server.test)
+}
+
+sourceSets {
+    main {
+        kotlin.srcDir("build/generated/ksp/main/kotlin")
+    }
 }
 
 java {
@@ -29,9 +38,10 @@ java {
 
 application {
     mainClass.set("net.brightroom.postalcode.ApplicationKt")
+}
 
-    val isDevelopment: Boolean = project.ext.has("development")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+ksp {
+    arg("KOIN_CONFIG_CHECK", "true")
 }
 
 spotless {

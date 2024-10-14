@@ -1,6 +1,15 @@
 ktor:
+  environment: "$PROFILE:dev"
   application:
     modules:
-      - net.brightroom.postalcode.config.ConfigKt.module
+      - "net.brightroom.postalcode.config.ConfigKt.module"
   deployment:
     port: 8080
+  datasource:
+    url: "jdbc:postgresql://postal_code_db:5432/postal_code"
+    username: "luster"
+    password: "luster"
+    hikari:
+      maximumPoolSize: 3
+      isAutoCommit: true
+      transactionIsolation: "TRANSACTION_REPEATABLE_READ"
